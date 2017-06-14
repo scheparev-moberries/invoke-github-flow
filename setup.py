@@ -26,8 +26,7 @@ setup(
     author_email='sergey.cheparev@moberries.com',
     url='https://github.com/scheparev-moberries/invoke-github-flow',
     license='MIT License',
-    packages=find_packages('src'),
-    package_dir={'': 'src'}, include_package_data=True,
-    zip_safe=False,
+    packages=find_packages(),
+    include_package_data=True,
     install_requires=install_requires,
 )
