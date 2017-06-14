@@ -1,7 +1,7 @@
-from django.conf import settings
 from git import Repo
 from invoke import task
 from datetime import datetime
+import os
 
 
 @task(help={
@@ -11,7 +11,7 @@ from datetime import datetime
 def stage(context, push=False, master_checkout=True):
     """Merge master into staging and push"""
 
-    repo = Repo(settings.PROJECT_ROOT)
+    repo = Repo(os.getcwd())
     if repo.is_dirty():
         if repo.untracked_files:
             print("Untracked changes: %s" % ",".join(repo.untracked_files))
@@ -45,7 +45,7 @@ def stage(context, push=False, master_checkout=True):
 def start(context, push=False):
     """Start release"""
 
-    repo = Repo(settings.PROJECT_ROOT)
+    repo = Repo(os.getcwd())
     if repo.is_dirty():
         if repo.untracked_files:
             print("Untracked changes: %s" % ",".join(repo.untracked_files))
@@ -75,7 +75,7 @@ def start(context, push=False):
 def publish(context):
     """Publish release"""
 
-    repo = Repo(settings.PROJECT_ROOT)
+    repo = Repo(os.getcwd())
     if repo.is_dirty():
         if repo.untracked_files:
             print("Untracked changes: %s" % ",".join(repo.untracked_files))
@@ -95,7 +95,7 @@ def publish(context):
 })
 def finish(context, push=False):
     """Finish and tag release"""
-    repo = Repo(settings.PROJECT_ROOT)
+    repo = Repo(os.getcwd())
 
     if repo.is_dirty():
         if repo.untracked_files:

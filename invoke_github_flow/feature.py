@@ -3,7 +3,6 @@ import os
 from django.utils.text import slugify
 from invoke import task
 from git import Repo
-from django.conf import settings
 
 
 def _connect_github():
@@ -39,7 +38,7 @@ def start(context, update=True):
         exit("Feature name was empty")
     branch_name = "%s-%s" % (issue_number, name) if issue_number else name
 
-    repo = Repo(settings.PROJECT_ROOT)
+    repo = Repo(os.getcwd())
 
     repo.heads.master.checkout()
     if update:
@@ -56,7 +55,7 @@ def start(context, update=True):
 })
 def finish(context, delete_branch=False, merge=False):
     """Finish current feature"""
-    repo = Repo(settings.PROJECT_ROOT)
+    repo = Repo(os.getcwd())
     current_branch = repo.head.reference
     if current_branch.name in ['release', 'staging', 'master']:
         exit("Not on a feature branch")
@@ -116,7 +115,7 @@ def publish(context, rebase_first=True, pull_request_create=False):
     if rebase_first:
         rebase(context)
 
-    repo = Repo(settings.PROJECT_ROOT)
+    repo = Repo(os.getcwd())
     current_branch = repo.head.reference
     if current_branch.name in ['release', 'staging', 'master']:
         exit("Not on a feature branch")
@@ -140,7 +139,7 @@ def publish(context, rebase_first=True, pull_request_create=False):
 @task
 def rebase(context):
     """Rebase current feature on master"""
-    repo = Repo(settings.PROJECT_ROOT)
+    repo = Repo(os.getcwd())
     current_branch = repo.head.reference
     if repo.is_dirty():
         if repo.untracked_files:
@@ -169,7 +168,7 @@ def pull_request(context):
     """Create pull request"""
 
     print("Creating pull request...")
-    repo = Repo(settings.PROJECT_ROOT)
+    repo = Repo(os.getcwd())
 
     if repo.is_dirty():
         if repo.untracked_files:
