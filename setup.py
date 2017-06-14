@@ -1,5 +1,6 @@
+import os
+
 from setuptools import setup, find_packages
-import sys, os
 
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.rst')).read()
@@ -8,9 +9,9 @@ NEWS = open(os.path.join(here, 'NEWS.txt')).read()
 version = '0.1'
 
 install_requires = [
-    # List your project dependencies here.
-    # For more details, see:
-    # http://packages.python.org/distribute/setuptools.html#declaring-dependencies
+    'invoke==0.15.0',
+    'gitpython==2.1.3',
+    'pygithub==1.34'
 ]
 
 setup(
@@ -19,7 +20,6 @@ setup(
     description="Invoke collections for automatic github flow",
     long_description=README + '\n\n' + NEWS,
     classifiers=[
-        # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     ],
     keywords='invoke github automation',
     author='Sergey Cheparev',
