@@ -90,10 +90,8 @@ def publish(context):
     print("Done.")
 
 
-@task(help={
-    "push": "Push changes to the server",
-})
-def finish(context, push=False):
+@task
+def finish(context):
     """Finish and tag release"""
     repo = Repo(os.getcwd())
 
@@ -118,14 +116,11 @@ def finish(context, push=False):
     staging = repo.heads.staging
     master = repo.heads.master
 
-    master.checkout()
-    repo.git.merge('release')
-
     staging.checkout()
     repo.git.merge('release')
+    origin.push()
 
-    if push:
-        sure = input("Are you sure? (Y/n):")
-        if sure == "Y":
-            origin.push()
-            origin.push(new_tag)
+    master.checkout()
+    repo.git.merge('release')
+    origin.push()
+    origin.push(new_tag)
