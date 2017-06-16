@@ -26,8 +26,8 @@ def start(context, update=True):
     """Create new feature by name"""
     issue_number = input("Github issue number: ")
 
-    grepo = _connect_github()
     if issue_number:
+        grepo = _connect_github()
         issue = grepo.get_issue(int(issue_number))
         print("Issue found: %s" % issue.title)
         issue_title = issue.title
