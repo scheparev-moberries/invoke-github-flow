@@ -22,9 +22,9 @@ def _connect_github():
 @task(help={
     "update": "Pull the current origin master state?"
 })
-def start(context, update=True):
+def start(context, issue_number=None, update=True):
     """Create new feature by name"""
-    issue_number = input("Github issue number: ")
+    issue_number = issue_number or input("Github issue number: ")
 
     if issue_number:
         grepo = _connect_github()
