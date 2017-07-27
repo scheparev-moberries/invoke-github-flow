@@ -9,7 +9,7 @@ NEWS = open(os.path.join(here, 'NEWS.txt')).read()
 version = '0.1'
 
 install_requires = [
-    'invoke==0.15.0',
+    'invoke==0.19.0',
     'gitpython==2.1.3',
     'pygithub==1.34'
 ]
