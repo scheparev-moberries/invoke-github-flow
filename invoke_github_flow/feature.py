@@ -20,9 +20,10 @@ def _connect_github():
 
 
 @task(help={
-    "update": "Pull the current origin master state?"
+    "update": "Pull the current origin master state?",
+    "issue_number": "Github issue number"
 })
-def start(context, issue_number=None, update=True):
+def start(context, issue_number, update=True):
     """Create new feature by name"""
     issue_number = issue_number or input("Github issue number: ")
 
