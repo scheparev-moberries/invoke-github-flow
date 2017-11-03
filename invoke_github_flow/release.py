@@ -116,11 +116,8 @@ def finish(context):
     staging = repo.heads.staging
     master = repo.heads.master
 
-    staging.checkout()
-    repo.git.merge('release')
-    origin.push()
-
     master.checkout()
     repo.git.merge('release')
+    repo.git.merge('staging')
     origin.push()
     origin.push(new_tag)
