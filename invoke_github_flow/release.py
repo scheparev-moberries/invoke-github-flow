@@ -121,3 +121,6 @@ def finish(context):
     repo.git.merge('staging')
     origin.push()
     origin.push(new_tag)
+
+    staging.checkout()
+    origin.push()
