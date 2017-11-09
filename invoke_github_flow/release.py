@@ -104,10 +104,7 @@ def finish(context):
     if current_branch.name != 'release':
         exit("Not on release branch")
 
-    tag_date = datetime.now().strftime("%y-%m-%d")
-    existing_tags_today = [tag.name for tag in repo.tags if tag_date in tag.name]
-    today_tag_number = len(existing_tags_today) + 1
-    tag_name = "release-%s-%02d" % (tag_date, today_tag_number)
+    tag_name = open("version.txt").read()
 
     origin = repo.remotes['origin']
     new_tag = repo.create_tag(tag_name, message='Automatic tag "{0}"'.format(tag_name))
