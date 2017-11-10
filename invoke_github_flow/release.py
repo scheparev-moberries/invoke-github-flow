@@ -115,9 +115,10 @@ def finish(context):
 
     master.checkout()
     repo.git.merge('release')
-    repo.git.merge('staging')
+
     origin.push()
     origin.push(new_tag)
 
     staging.checkout()
+    repo.git.merge('release')
     origin.push()
