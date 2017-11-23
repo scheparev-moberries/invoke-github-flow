@@ -122,3 +122,5 @@ def finish(context):
     staging.checkout()
     repo.git.merge('release')
     origin.push()
+
+    master.checkout()
